@@ -26,14 +26,14 @@ public class Player : MonoBehaviour {
 	float velocityXSmoothing;
 
 	Controller2D controller;
-
+	CameraFollow camera;
 	Vector2 directionalInput;
 	bool wallSliding;
 	int wallDirX;
 
 	void Start() {
 		controller = GetComponent<Controller2D> ();
-
+		camera = FindObjectOfType<CameraFollow>().GetComponent<CameraFollow>();
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (gravity) * minJumpHeight);
@@ -90,8 +90,17 @@ public class Player : MonoBehaviour {
 			velocity.y = minJumpVelocity;
 		}
 	}
-		
 
+
+    public void OnSInputDown()
+    {
+		camera.verticalOffset = -2;
+    }
+	public void OnSInputUp()
+	{
+		//Reset Camera Y Position
+		camera.verticalOffset = 1;
+	}
 	void HandleWallSliding() {
 		wallDirX = (controller.collisions.left) ? -1 : 1;
 		wallSliding = false;
