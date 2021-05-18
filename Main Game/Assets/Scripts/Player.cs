@@ -66,8 +66,16 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	public void OnMouseLeftDown()
+    {
 
-    public void OnSInputDown()
+    }
+	public void OnMouseRightDown()
+	{
+
+	}
+
+	public void OnSInputDown()
     {
 		camera.verticalOffset = -2;
     }

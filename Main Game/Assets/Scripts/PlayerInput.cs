@@ -28,5 +28,13 @@ public class PlayerInput : MonoBehaviour {
 		{
 			player.OnSInputUp();
 		}
+		if (Input.GetKeyDown(KeyCode.Mouse0))
+		{
+			player.OnMouseLeftDown();
+		}
+		if (Input.GetKeyDown(KeyCode.Mouse1))
+		{
+			player.OnMouseRightDown();
+		}
 	}
 }
