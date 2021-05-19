@@ -4,6 +4,7 @@ using System.Collections;
 [RequireComponent (typeof (Controller2D))]
 public class Player : MonoBehaviour {
 
+	public LayerMask punchMe;
 	public float maxJumpHeight = 4;
 	public float minJumpHeight = 1;
 	public float timeToJumpApex = .4f;
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour {
 	float maxJumpVelocity;
 	float minJumpVelocity;
 	Vector3 velocity;
+	Vector3 jabSize;
 	float velocityXSmoothing;
 
 	Controller2D controller;
@@ -27,6 +29,7 @@ public class Player : MonoBehaviour {
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (gravity) * minJumpHeight);
+		jabSize = new Vector3(2.5f, 0.5f, 0);
 	}
 
 	void Update() {
@@ -68,8 +71,13 @@ public class Player : MonoBehaviour {
 
 	public void OnMouseLeftDown()
     {
-
-    }
+		Collider2D otherCollider = Physics2D.OverlapBox(transform.position + Vector3.right, jabSize, 0, punchMe);
+		if(otherCollider != null)
+        {
+			otherCollider?.gameObject.GetComponent<punchingBag>().TakeAHit();
+			Debug.Log(otherCollider.gameObject);
+		}
+	}
 	public void OnMouseRightDown()
 	{
 
@@ -89,5 +97,12 @@ public class Player : MonoBehaviour {
 		float targetVelocityX = directionalInput.x * moveSpeed;
 		velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
 		velocity.y += gravity * Time.deltaTime;
+	}
+
+    private void OnDrawGizmos()
+    {
+		Gizmos.matrix = transform.localToWorldMatrix;
+		Gizmos.color = Color.red;
+		Gizmos.DrawWireCube(Vector3.right, jabSize);
 	}
 }
