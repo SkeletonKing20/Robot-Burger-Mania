@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class punchingBag : MonoBehaviour
+public class punchingBag : MonoBehaviour, IDamagable
 {
     float knockback  = 1f;
     public void TakeAHit()
     {
-        transform.position += Vector3.right * knockback;
+        transform.Translate(Vector3.right * knockback);
     }
 }

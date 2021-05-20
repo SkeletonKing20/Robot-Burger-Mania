@@ -9,9 +9,6 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Player player;
     public float cooldown = 0.5f;
-    private bool moveLeft = false;
-    private bool moveRight = false;
-
     void Start()
     {
         player = FindObjectOfType<Player>();
@@ -20,47 +17,48 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if (player.transform.position.x - transform.position.x  >= -3 && player.transform.position.x - transform.position.x < -2)
+        Jump();
+        Debug.Log((getDistanceFromObject(player) < 3));
+        if((getDistanceFromObject(player) > 3))
         {
-            moveLeft = false;
-            moveRight = true;
+            if(player.transform.position.x < transform.position.x)
+            {
+                moveLeft();
+            }
+            else
+            {
+                moveRight();
+            }
         }
 
-        if (player.transform.position.x - transform.position.x <= -7 && player.transform.position.x - transform.position.x > -10)
+        if ((getDistanceFromObject(player) < 3) || getDistanceFromObject(player) == 0)
         {
-            moveRight = false;
-            moveLeft = true;
+                moveRight();
+            
         }
+    }
 
-        if (player.transform.position.x - transform.position.x  <= 3 && player.transform.position.x - transform.position.x > 2)
-        {
-            moveRight = false;
-            moveLeft = true;
-        }
+    public float getDistanceFromObject(Player obj)
+    {
+        return Mathf.Abs((obj.transform.position.x) - transform.position.x);
+    }
 
-        if (player.transform.position.x - transform.position.x  >= 7 && player.transform.position.x - transform.position.x <= 8)
-        {
-            moveLeft = false;
-            moveRight = true;
-        }
+    public void moveRight()
+    {
+        transform.Translate(Vector2.right * speed * Time.deltaTime);
+    }
 
+    public void moveLeft()
+    {
+        transform.Translate(-Vector2.right * speed * Time.deltaTime);
+    }
 
-        if (moveRight)
-        {
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
-        }
-
-        if (moveLeft)
-        {
-            transform.Translate(-Vector2.right * speed * Time.deltaTime);
-        }
-
-
+    public void Jump()
+    {
         if (Time.time > cooldown && Mathf.Abs(_rigidbody.velocity.y) < 0.001f)
         {
             _rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
             cooldown = Time.time + 0.5f;
         }
     }
-
 }

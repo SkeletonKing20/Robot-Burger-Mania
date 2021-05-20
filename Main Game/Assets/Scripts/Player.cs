@@ -19,12 +19,13 @@ public class Player : MonoBehaviour {
 	Vector3 jabSize;
 	float velocityXSmoothing;
 
+	Animator animeThor;
 	Controller2D controller;
 	CameraFollow camera;
 	Vector2 directionalInput;
-
 	void Start() {
 		controller = GetComponent<Controller2D> ();
+		animeThor = GetComponentInChildren<Animator>();
 		camera = FindObjectOfType<CameraFollow>().GetComponent<CameraFollow>();
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -71,12 +72,25 @@ public class Player : MonoBehaviour {
 
 	public void OnMouseLeftDown()
     {
-		Collider2D otherCollider = Physics2D.OverlapBox(transform.position + Vector3.right, jabSize, 0, punchMe);
-		if(otherCollider != null)
+		if(canAttack())
         {
-			otherCollider?.gameObject.GetComponent<punchingBag>().TakeAHit();
-			Debug.Log(otherCollider.gameObject);
+
+			lightAttack();
+        }
+	}
+
+	public bool canAttack()
+	{
+		float coolDown = 0f;
+		if (Time.time > coolDown)
+		{
+			coolDown = Time.time + 0.5f;
+			return true;
 		}
+        else
+        {
+			return false;
+        }
 	}
 	public void OnMouseRightDown()
 	{
@@ -90,7 +104,7 @@ public class Player : MonoBehaviour {
 	public void OnSInputUp()
 	{
 		//Reset Camera Y Position
-		camera.verticalOffset = 1;
+		camera.verticalOffset = 0.5f;
 	}
 
 	void CalculateVelocity() {
@@ -99,10 +113,21 @@ public class Player : MonoBehaviour {
 		velocity.y += gravity * Time.deltaTime;
 	}
 
+	public void lightAttack()
+    {
+		Collider2D otherCollider = Physics2D.OverlapBox(transform.position + Vector3.right + Vector3.up, jabSize, 0, punchMe);
+		if (otherCollider != null)
+		{
+			otherCollider?.gameObject.GetComponent<IDamagable>().TakeAHit();
+			Debug.Log(otherCollider.gameObject.tag);
+		}
+		animeThor.Play("Base Layer.Attack", 0, 0);
+	}
+
     private void OnDrawGizmos()
     {
 		Gizmos.matrix = transform.localToWorldMatrix;
 		Gizmos.color = Color.red;
-		Gizmos.DrawWireCube(Vector3.right, jabSize);
+		Gizmos.DrawWireCube(Vector3.right + (0.5f * Vector3.up), jabSize);
 	}
 }

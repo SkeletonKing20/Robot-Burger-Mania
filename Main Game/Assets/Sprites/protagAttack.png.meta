@@ -1,37 +1,28 @@
 fileFormatVersion: 2
-guid: 75f994f633d8001449477481edfda99e
+guid: dc7e87162d7ccf245b9a494bf7b10a59
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2433349138132994202
-    second: _ileMapTest_0
+      213: 1374566100746894647
+    second: protagAttack_0
   - first:
-      213: -8448020393410190599
-    second: _ileMapTest_1
+      213: -1800761180906157526
+    second: protagAttack_1
   - first:
-      213: 6202027960786360273
-    second: _ileMapTest_2
+      213: 8761071746473321678
+    second: protagAttack_2
   - first:
-      213: 2918997060265466558
-    second: _ileMapTest_3
+      213: 2546173925318142490
+    second: protagAttack_3
   - first:
-      213: -5505051075595606771
-    second: _ileMapTest_4
+      213: -7030206529980868082
+    second: protagAttack_4
   - first:
-      213: 2042995998344156625
-    second: _ileMapTest_5
+      213: 3201607810455987884
+    second: protagAttack_5
   - first:
-      213: 5526247752997701034
-    second: _ileMapTest_6
-  - first:
-      213: -1009023906468670113
-    second: _ileMapTest_7
-  - first:
-      213: 8978134921566344744
-    second: _ileMapTest_8
-  - first:
-      213: 7482205416459551568
-    second: _ileMapTest_9
+      213: -8586775237359793191
+    second: protagAttack_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -76,7 +67,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -119,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: _ileMapTest_0
+      name: protagAttack_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 304
-        width: 16
-        height: 16
+        y: 1800
+        width: 900
+        height: 900
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a988be0162ef4c120800000000000000
-      internalID: 2433349138132994202
+      spriteID: 73dff4bf590731310800000000000000
+      internalID: 1374566100746894647
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: _ileMapTest_1
+      name: protagAttack_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 304
-        width: 16
-        height: 16
+        x: 900
+        y: 1800
+        width: 900
+        height: 900
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f2a783363a92ca80800000000000000
-      internalID: -8448020393410190599
+      spriteID: a2a86ce2f396207e0800000000000000
+      internalID: -1800761180906157526
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: _ileMapTest_2
+      name: protagAttack_2
       rect:
         serializedVersion: 2
-        x: 32
-        y: 304
-        width: 16
-        height: 16
+        x: 1800
+        y: 1800
+        width: 900
+        height: 900
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,83 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d716b11297021650800000000000000
-      internalID: 6202027960786360273
+      spriteID: ec4e044d554959970800000000000000
+      internalID: 8761071746473321678
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: _ileMapTest_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 288
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eba588d5c5c528820800000000000000
-      internalID: 2918997060265466558
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: _ileMapTest_4
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 288
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d05edb8b6312a93b0800000000000000
-      internalID: -5505051075595606771
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: _ileMapTest_5
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 288
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1d519d6490e2a5c10800000000000000
-      internalID: 2042995998344156625
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: _ileMapTest_6
+      name: protagAttack_3
       rect:
         serializedVersion: 2
         x: 0
-        y: 272
-        width: 16
-        height: 16
+        y: 900
+        width: 900
+        height: 900
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa58a325d0d21bc40800000000000000
-      internalID: 5526247752997701034
+      spriteID: a1a23f2e1b3d55320800000000000000
+      internalID: 2546173925318142490
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: _ileMapTest_7
+      name: protagAttack_4
       rect:
         serializedVersion: 2
-        x: 16
-        y: 272
-        width: 16
-        height: 16
+        x: 900
+        y: 900
+        width: 900
+        height: 900
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -280,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f55de056a1a3ff1f0800000000000000
-      internalID: -1009023906468670113
+      spriteID: e0adbda9860bf6e90800000000000000
+      internalID: -7030206529980868082
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: _ileMapTest_8
+      name: protagAttack_5
       rect:
         serializedVersion: 2
-        x: 32
-        y: 272
-        width: 16
-        height: 16
+        x: 1800
+        y: 900
+        width: 900
+        height: 900
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -301,20 +229,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 826dd79942eb89c70800000000000000
-      internalID: 8978134921566344744
+      spriteID: ca6685c37556e6c20800000000000000
+      internalID: 3201607810455987884
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: _ileMapTest_9
+      name: protagAttack_6
       rect:
         serializedVersion: 2
-        x: 16
-        y: 256
-        width: 16
-        height: 16
+        x: 0
+        y: 0
+        width: 900
+        height: 900
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -322,8 +250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05343901f2226d760800000000000000
-      internalID: 7482205416459551568
+      spriteID: 9db8c039a65a5d880800000000000000
+      internalID: -8586775237359793191
       vertices: []
       indices: 
       edges: []
