@@ -15,7 +15,7 @@ public class CameraLock : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(player.transform.position.x > -16)
+        if(player.transform.position.x > -15)
         {
             locked = true;
             Vector3.Lerp(transform.position, targetPosition, 2f);

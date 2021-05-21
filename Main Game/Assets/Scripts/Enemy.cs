@@ -57,9 +57,11 @@ public class Enemy : MonoBehaviour
     {
         if (Time.time > cooldown && Mathf.Abs(_rigidbody.velocity.y) < 0.001f)
         {
-            if (Random.Range(0,10) == 0) 
+            float randomJump = Random.Range(0, 3);
+            Debug.Log(randomJump);
+            if (randomJump == 0) 
             {
-                _rigidbody.AddForce(new Vector2(0, 7), ForceMode2D.Impulse);
+                _rigidbody.AddForce(new Vector2(0, 8), ForceMode2D.Impulse);
                 cooldown = Time.time + 0.5f;
             }
             else
