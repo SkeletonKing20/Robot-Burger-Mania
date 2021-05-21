@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-[RequireComponent (typeof (Controller2D))]
 public class Player : MonoBehaviour {
 
 	public LayerMask punchMe;
@@ -11,6 +9,9 @@ public class Player : MonoBehaviour {
 	float accelerationTimeAirborne = .2f;
 	float accelerationTimeGrounded = .1f;
 	float moveSpeed = 6;
+	public bool hitConnect;
+	public int currentHp;
+	public int maxHp;
 
 	float gravity;
 	float maxJumpVelocity;
@@ -26,11 +27,11 @@ public class Player : MonoBehaviour {
 	void Start() {
 		controller = GetComponent<Controller2D> ();
 		animeThor = GetComponentInChildren<Animator>();
-		camera = FindObjectOfType<CameraFollow>().GetComponent<CameraFollow>();
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (gravity) * minJumpHeight);
 		jabSize = new Vector3(2.5f, 0.5f, 0);
+		currentHp = maxHp;
 	}
 
 	void Update() {
@@ -96,11 +97,6 @@ public class Player : MonoBehaviour {
 	{
 
 	}
-
-	public void OnSInputDown()
-    {
-		camera.verticalOffset = -2;
-    }
 	public void OnSInputUp()
 	{
 		//Reset Camera Y Position
@@ -115,15 +111,32 @@ public class Player : MonoBehaviour {
 
 	public void lightAttack()
     {
-		Collider2D otherCollider = Physics2D.OverlapBox(transform.position + Vector3.right + Vector3.up, jabSize, 0, punchMe);
-		if (otherCollider != null)
-		{
-			otherCollider?.gameObject.GetComponent<IDamagable>().TakeAHit();
-			Debug.Log(otherCollider.gameObject.tag);
-		}
-		animeThor.Play("Base Layer.Attack", 0, 0);
+		animeThor.Play("Base Layer.lightAttack", 0, 0);
 	}
 
+	public void OnDownTilt()
+    {
+		downTilt();
+    }
+
+	public void downTilt()
+    {
+
+    }
+
+	public void getHitForDamage(int damage)
+    {
+		currentHp -= 0;
+		if(currentHp <= 0)
+        {
+			gameOver();
+        }
+    }
+
+	public void gameOver()
+    {
+
+    }
     private void OnDrawGizmos()
     {
 		Gizmos.matrix = transform.localToWorldMatrix;

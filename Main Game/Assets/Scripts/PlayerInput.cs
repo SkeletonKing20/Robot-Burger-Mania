@@ -22,19 +22,21 @@ public class PlayerInput : MonoBehaviour {
 		}
         if (Input.GetKeyDown (KeyCode.S))
         {
-			player.OnSInputDown ();
         }
 		if (Input.GetKeyUp(KeyCode.S))
 		{
-			player.OnSInputUp();
 		}
-		if (Input.GetKeyDown(KeyCode.Mouse0))
+		if (Input.GetKeyDown(KeyCode.Mouse0) && !Input.GetKey(KeyCode.S))
 		{
 			player.OnMouseLeftDown();
 		}
-		if (Input.GetKeyDown(KeyCode.Mouse1))
+		if (Input.GetKeyDown(KeyCode.Mouse1) && !Input.GetKey(KeyCode.S))
 		{
 			player.OnMouseRightDown();
 		}
+        if (Input.GetKey(KeyCode.S) && Input.GetKeyDown(KeyCode.Mouse0))
+        {
+			player.OnDownTilt();
+        }
 	}
 }
