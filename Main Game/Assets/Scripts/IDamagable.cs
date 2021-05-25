@@ -1,4 +1,4 @@
 ﻿public interface IDamagable
 {
-    void TakeAHit();
+    void getHitForDamage(int damage);
 }
