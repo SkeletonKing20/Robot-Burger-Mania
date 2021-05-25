@@ -18,14 +18,17 @@ public class Player : Entity, IDamagable {
 	Vector3 velocity;
 	Vector3 jabSize;
 	float velocityXSmoothing;
-
+	Vector3 scaleLeft = new Vector3(-1,1,1);
+	Vector3 scaleRight = new Vector3(1,1,1);
 	Animator animeThor;
 	Controller2D controller;
 	CameraFollow camera;
+	SpriteRenderer spriteR;
 	Vector2 directionalInput;
 	void Start() {
 		controller = GetComponent<Controller2D> ();
 		animeThor = GetComponentInChildren<Animator>();
+		spriteR = GetComponentInChildren<SpriteRenderer>();
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (gravity) * minJumpHeight);
@@ -45,12 +48,40 @@ public class Player : Entity, IDamagable {
 				velocity.y = 0;
 			}
 		}
+
+		updateAnimations();
 	}
 
 	public void SetDirectionalInput (Vector2 input) {
 		directionalInput = input;
 	}
 
+    public void updateAnimations()
+    {
+        if (directionalInput.x > 0)
+        {
+			transform.localScale = scaleRight;
+			animeThor.SetBool("isWalking", true);
+        }
+		else if(directionalInput.x < 0)
+        {
+			transform.localScale = scaleLeft;
+			animeThor.SetBool("isWalking", true);
+		}
+		else
+        {
+			animeThor.SetBool("isWalking", false);
+		}
+
+        if (controller.collisions.below)
+        {
+			animeThor.SetBool("isGrounded", true);
+		}
+        else
+        {
+			animeThor.SetBool("isGrounded", false);
+		}
+    }
 	public void OnJumpInputDown() {
 		if (controller.collisions.below) 
 		{
@@ -110,7 +141,7 @@ public class Player : Entity, IDamagable {
 	}
 	public void OnMouseRightDown()
 	{
-
+		
 	}
 	public void OnSInputUp()
 	{
