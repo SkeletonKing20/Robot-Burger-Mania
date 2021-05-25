@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-public class Player : MonoBehaviour {
+public class Player : Entity, IDamagable {
 
 	public LayerMask punchMe;
 	public float maxJumpHeight = 4;
@@ -10,8 +10,7 @@ public class Player : MonoBehaviour {
 	float accelerationTimeGrounded = .1f;
 	float moveSpeed = 6;
 	public bool hitConnect;
-	public int currentHp;
-	public int maxHp;
+	
 
 	float gravity;
 	float maxJumpVelocity;
@@ -111,7 +110,10 @@ public class Player : MonoBehaviour {
 
 	public void lightAttack()
     {
-		animeThor.Play("Base Layer.lightAttack", 0, 0);
+		if(controller.collisions.below)
+        {
+			animeThor.Play("Base Layer.lightAttack", 0, 0);
+        }
 	}
 
 	public void OnDownTilt()
@@ -124,16 +126,7 @@ public class Player : MonoBehaviour {
 
     }
 
-	public void getHitForDamage(int damage)
-    {
-		currentHp -= 0;
-		if(currentHp <= 0)
-        {
-			gameOver();
-        }
-    }
-
-	public void gameOver()
+	public override void gameOver()
     {
 
     }

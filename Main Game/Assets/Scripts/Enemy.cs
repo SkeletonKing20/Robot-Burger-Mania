@@ -2,29 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IDamagable
+public class Enemy : Entity, IDamagable
 {
     public float speed = 5f;
     public float JumpForce = 3;
     private Rigidbody2D _rigidbody;
     private Player player;
     public float cooldown = 0.5f;
-    public int damage;
-    public float knockback = 1f;
+    public int damage; 
     bool hopping = true;
     Animator animeThor;
     bool isInvincible;
-
-    int currentHp;
-    int maxHp;
+    SpriteRenderer spriteR;
     bool isFleeing;
     void Start()
     {
         player = FindObjectOfType<Player>();
         _rigidbody = GetComponent<Rigidbody2D>();
         animeThor = GetComponentInChildren<Animator>();
+        spriteR = GetComponentInChildren<SpriteRenderer>();
         maxHp = 3;
         currentHp = maxHp;
+        knockback = 1f;
     }
 
     void Update()
@@ -33,8 +32,8 @@ public class Enemy : MonoBehaviour, IDamagable
         if (hopping && !isFleeing)
         {
 
-            Debug.Log((getDistanceFromObject(player) < 3));
-            if((getDistanceFromObject(player) > 3))
+            Debug.Log((getDistanceFromObject(player.gameObject) < 3));
+            if((getDistanceFromObject(player.gameObject) > 3))
             {
                 if(player.transform.position.x < transform.position.x)
                 {
@@ -46,27 +45,20 @@ public class Enemy : MonoBehaviour, IDamagable
                 }
             }
 
-            if ((getDistanceFromObject(player) < 3) || getDistanceFromObject(player) == 0)
+            if ((getDistanceFromObject(player.gameObject) < 3) || getDistanceFromObject(player.gameObject) == 0)
             {
                     moveRight();
             
             }
         }
 
-        if (isFleeing && getDistanceFromObject(player) < 12f)
+        if (isFleeing && getDistanceFromObject(player.gameObject) < 12f)
         {
             moveRight();
         }
-        else
-        {
-            Jump();
-        }
     }
 
-    public float getDistanceFromObject(Player obj)
-    {
-        return Mathf.Abs((obj.transform.position.x) - transform.position.x);
-    }
+    
 
     public void moveRight()
     {
@@ -109,7 +101,7 @@ public class Enemy : MonoBehaviour, IDamagable
         }
         if(collision.gameObject.CompareTag("Attack"))
         {
-            TakeAHit();
+            getHitForDamage(1);
         }
     }
 
@@ -118,10 +110,11 @@ public class Enemy : MonoBehaviour, IDamagable
         player.getHitForDamage(damage);
     }
 
-    public void TakeAHit()
+    public override void getHitForDamage(int damage)
     {
         if (!isInvincible)
         {
+            animeThor.Play("Base Layer.tutBurgerHit", 0, 0);
             currentHp--;
             if (currentHp <= 0)
             {
@@ -133,22 +126,11 @@ public class Enemy : MonoBehaviour, IDamagable
         
     }
 
-    private IEnumerator InvincibilityCoroutine(float duration)
-    {
-        
-        isInvincible = true;
-        animeThor.Play("Base Layer.tutBurgerHit", 0, 0);
-        transform.Translate(Vector3.right * knockback);
-        for (float t = 0; t < duration; t += Time.deltaTime)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        isInvincible = false;
-    }
-
     public void abandonShip()
     {
+        spriteR.flipX  = true;
         speed *= 2;
         isFleeing = true;
+        isInvincible = true;
     }
 }
