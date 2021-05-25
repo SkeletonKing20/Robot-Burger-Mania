@@ -1,0 +1,499 @@
+fileFormatVersion: 2
+guid: 8a75ea622e49fff45b58f68f8bd31b12
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3802539749051752100
+    second: fryder_full_spritesheet_0
+  - first:
+      213: -7687631388575581649
+    second: fryder_full_spritesheet_1
+  - first:
+      213: 6971879375234416156
+    second: fryder_full_spritesheet_2
+  - first:
+      213: -5044952634893924095
+    second: fryder_full_spritesheet_3
+  - first:
+      213: 268008663663166800
+    second: fryder_full_spritesheet_4
+  - first:
+      213: -8467786232271658483
+    second: fryder_full_spritesheet_5
+  - first:
+      213: -771339032546357533
+    second: fryder_full_spritesheet_6
+  - first:
+      213: 8649327337440976484
+    second: fryder_full_spritesheet_7
+  - first:
+      213: -4726366231522642029
+    second: fryder_full_spritesheet_8
+  - first:
+      213: 2802468643388107416
+    second: fryder_full_spritesheet_9
+  - first:
+      213: 5261744940804308333
+    second: fryder_full_spritesheet_10
+  - first:
+      213: 7342089473814323434
+    second: fryder_full_spritesheet_11
+  - first:
+      213: 787411338434955103
+    second: fryder_full_spritesheet_12
+  - first:
+      213: -6137736133741804304
+    second: fryder_full_spritesheet_13
+  - first:
+      213: -7981190836863518405
+    second: fryder_full_spritesheet_14
+  - first:
+      213: 597278492738372349
+    second: fryder_full_spritesheet_15
+  - first:
+      213: -7483679686167054591
+    second: fryder_full_spritesheet_16
+  - first:
+      213: -2137480750674109892
+    second: fryder_full_spritesheet_17
+  - first:
+      213: 6137343987703458500
+    second: fryder_full_spritesheet_18
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: fryder_full_spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3300
+        width: 1020
+        height: 660
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ae588a41c555c430800000000000000
+      internalID: 3802539749051752100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fryder_full_spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 3300
+        width: 1020
+        height: 660
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2a3fcf9bfb005590800000000000000
+      internalID: -7687631388575581649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fryder_full_spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 2040
+        y: 3300
+        width: 1020
+        height: 660
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1e38b96a5711c060800000000000000
+      internalID: 6971879375234416156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fryder_full_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2640
+        width: 1020
+        height: 660
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1090a70de4abcf9b0800000000000000
+      internalID: -5044952634893924095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fryder_full_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 2640
+        width: 1020
+        height: 660
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 055ce5aa57828b300800000000000000
+      internalID: 268008663663166800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fryder_full_spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 2040
+        y: 2640
+        width: 1020
+        height: 660
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d02218739416c7a80800000000000000
+      internalID: -8467786232271658483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fryder_full_spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1980
+        width: 1020
+        height: 660
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ee4ea39c37ab45f0800000000000000
+      internalID: -771339032546357533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fryder_full_spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 1980
+        width: 1020
+        height: 660
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46e9e362365980870800000000000000
+      internalID: 8649327337440976484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fryder_full_spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 2040
+        y: 1980
+        width: 1020
+        height: 660
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 397f0bb24f2986eb0800000000000000
+      internalID: -4726366231522642029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fryder_full_spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1320
+        width: 1020
+        height: 660
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89aa15f026e54e620800000000000000
+      internalID: 2802468643388107416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fryder_full_spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 1320
+        width: 1020
+        height: 660
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6d795f4529750940800000000000000
+      internalID: 5261744940804308333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fryder_full_spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 2040
+        y: 1320
+        width: 1020
+        height: 660
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae066d3f97754e560800000000000000
+      internalID: 7342089473814323434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fryder_full_spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 660
+        width: 1020
+        height: 660
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f48d37618162daa0800000000000000
+      internalID: -6137736133741804304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fryder_full_spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1020
+        height: 660
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df2c6a7ef95f94800800000000000000
+      internalID: 597278492738372349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fryder_full_spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 660
+        width: 1020
+        height: 660
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f57c78fb0727dea00800000000000000
+      internalID: 787411338434955103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fryder_full_spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 2040
+        y: 660
+        width: 1020
+        height: 660
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b39b524583d1d3190800000000000000
+      internalID: -7981190836863518405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
