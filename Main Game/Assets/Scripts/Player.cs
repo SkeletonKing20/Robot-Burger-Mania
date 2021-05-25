@@ -52,13 +52,19 @@ public class Player : Entity, IDamagable {
 	}
 
 	public void OnJumpInputDown() {
-		if (controller.collisions.below) {
-			if (controller.collisions.slidingDownMaxSlope) {
-				if (directionalInput.x != -Mathf.Sign (controller.collisions.slopeNormal.x)) { // not jumping against max slope
+		if (controller.collisions.below) 
+		{
+			animeThor.Play("Base Layer.Jump", 0, 0);
+			if (controller.collisions.slidingDownMaxSlope) 
+			{
+				if (directionalInput.x != -Mathf.Sign (controller.collisions.slopeNormal.x)) 
+				{ // not jumping against max slope
 					velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
 					velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
 				}
-			} else {
+			} 
+			else 
+			{
 				velocity.y = maxJumpVelocity;
 			}
 		}
@@ -118,7 +124,7 @@ public class Player : Entity, IDamagable {
 
 	public void lightAttack()
     {
-		if((animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.robotWalk")))
+		if((animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.robotWalk") || animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Idle")))
         {
 			animeThor.gameObject.tag = "Attack";
 			animeThor.Play("Base Layer.lightAttack", 0, 0);
@@ -135,7 +141,7 @@ public class Player : Entity, IDamagable {
     }
 	public void downTilt()
     {
-		if (controller.collisions.below && (animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.robotWalk")))
+		if (controller.collisions.below && (animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.robotWalk") || animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Idle")))
 		{
 			animeThor.gameObject.tag = "downTilt";
 			animeThor.Play("Base Layer.downTilt", 0, 0);
