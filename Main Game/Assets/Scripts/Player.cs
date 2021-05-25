@@ -10,8 +10,8 @@ public class Player : Entity, IDamagable {
 	float accelerationTimeGrounded = .1f;
 	float moveSpeed = 6;
 	public bool hitConnect;
-	
-
+	public float dashLength = 5;
+	public float dashCooldown;
 	float gravity;
 	float maxJumpVelocity;
 	float minJumpVelocity;
@@ -74,8 +74,18 @@ public class Player : Entity, IDamagable {
     {
 		if(canAttack())
         {
-
-			lightAttack();
+            if (controller.collisions.below)
+            {
+				lightAttack();
+            }
+            else
+            {
+                if (Time.time > dashCooldown)
+                {
+					dashAttack();
+					dashCooldown = Time.time + 1f;
+                }
+            }
         }
 	}
 
@@ -98,8 +108,6 @@ public class Player : Entity, IDamagable {
 	}
 	public void OnSInputUp()
 	{
-		//Reset Camera Y Position
-		camera.verticalOffset = 0.5f;
 	}
 
 	void CalculateVelocity() {
@@ -110,8 +118,9 @@ public class Player : Entity, IDamagable {
 
 	public void lightAttack()
     {
-		if(controller.collisions.below)
+		if((animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.robotWalk")))
         {
+			animeThor.gameObject.tag = "Attack";
 			animeThor.Play("Base Layer.lightAttack", 0, 0);
         }
 	}
@@ -121,10 +130,17 @@ public class Player : Entity, IDamagable {
 		downTilt();
     }
 
+	public void dashAttack()
+    {
+    }
 	public void downTilt()
     {
-
-    }
+		if (controller.collisions.below && (animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.robotWalk")))
+		{
+			animeThor.gameObject.tag = "downTilt";
+			animeThor.Play("Base Layer.downTilt", 0, 0);
+		}
+	}
 
 	public override void gameOver()
     {
@@ -135,5 +151,14 @@ public class Player : Entity, IDamagable {
 		Gizmos.matrix = transform.localToWorldMatrix;
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireCube(Vector3.right + (0.5f * Vector3.up), jabSize);
+	}
+
+	protected IEnumerator DashAttackCoroutine()
+    {
+		while (transform.position != transform.position + new Vector3(Mathf.Sign(directionalInput.x) * dashLength, 0, 0))
+		{
+			transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(Mathf.Sign(directionalInput.x) * dashLength, 0, 0), 0.5f);
+			yield return new WaitForEndOfFrame();
+		}
 	}
 }
