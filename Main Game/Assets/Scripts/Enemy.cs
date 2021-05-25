@@ -12,7 +12,6 @@ public class Enemy : Entity, IDamagable
     public int damage; 
     bool hopping = true;
     Animator animeThor;
-    bool isInvincible;
     SpriteRenderer spriteR;
     bool isFleeing;
     void Start()
@@ -101,7 +100,13 @@ public class Enemy : Entity, IDamagable
         }
         if(collision.gameObject.CompareTag("Attack"))
         {
+            TakeAHit(1);
+        }
+        if (collision.gameObject.CompareTag("downTilt"))
+        {
             getHitForDamage(1);
+            hopping = false;
+            _rigidbody.AddForce(new Vector2(0, 8), ForceMode2D.Impulse);
         }
     }
 
@@ -114,16 +119,20 @@ public class Enemy : Entity, IDamagable
     {
         if (!isInvincible)
         {
-            animeThor.Play("Base Layer.tutBurgerHit", 0, 0);
-            currentHp--;
+            currentHp -= damage;
             if (currentHp <= 0)
             {
                 abandonShip();
             }
-            player.hitConnect = true;
-            StartCoroutine(InvincibilityCoroutine(1f));
         }
-        
+    }
+
+    public void TakeAHit(int damage)
+    {
+        animeThor.Play("Base Layer.tutBurgerHit", 0, 0);
+        getHitForDamage(damage);
+        player.hitConnect = true;
+        StartCoroutine(InvincibilityCoroutine(1f));
     }
 
     public void abandonShip()
