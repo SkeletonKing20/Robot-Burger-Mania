@@ -5,20 +5,18 @@ using UnityEngine;
 public class CameraLock : MonoBehaviour
 {
 	Player player;
-    Vector2[] cameraPoints;
-    Vector3 targetPosition = new Vector3(-13, 1, -10);
+    public Vector3[] cameraPoints;
     public bool locked;
     private void Start()
     {
         player = FindObjectOfType<Player>();
     }
 
-    private void LateUpdate()
+    private void Update()
     {
-        if(player.transform.position.x > -15)
+        foreach(Vector3 position in cameraPoints)
         {
-            locked = true;
-            Vector3.Lerp(transform.position, targetPosition, 2f);
+
         }
     }
 }
