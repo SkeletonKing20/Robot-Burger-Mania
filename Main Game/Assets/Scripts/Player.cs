@@ -3,28 +3,39 @@ using System.Collections;
 public class Player : Entity, IDamagable {
 
 	public LayerMask punchMe;
+	
+	float gravity;
+	Vector2 directionalInput;
+	
 	public float maxJumpHeight = 4;
 	public float minJumpHeight = 1;
 	public float timeToJumpApex = .4f;
-	float accelerationTimeAirborne = .2f;
-	float accelerationTimeGrounded = .1f;
-	float moveSpeed = 6;
-	public bool hitConnect;
-	public float dashLength = 5;
-	public float dashCooldown;
-	float gravity;
+	
 	float maxJumpVelocity;
 	float minJumpVelocity;
+	
+	float accelerationTimeAirborne = .2f;
+	float accelerationTimeGrounded = .1f;
+	
+	float moveSpeed = 6;
 	Vector3 velocity;
-	Vector3 jabSize;
 	float velocityXSmoothing;
+	
+	public bool hitConnect;
+	Vector3 jabSize;
+	Vector2 targetDash;
+	Vector2 targetDashPosition;
+	public float dashSpeed = 3f;
+	bool isDashing;
+	public float dashLength = 5f;
+	public float dashCooldown;
+	
 	Vector3 scaleLeft = new Vector3(-1,1,1);
 	Vector3 scaleRight = new Vector3(1,1,1);
+	
 	Animator animeThor;
 	Controller2D controller;
-	CameraFollow camera;
 	SpriteRenderer spriteR;
-	Vector2 directionalInput;
 	void Start() {
 		controller = GetComponent<Controller2D> ();
 		animeThor = GetComponentInChildren<Animator>();
@@ -38,17 +49,27 @@ public class Player : Entity, IDamagable {
 
 	void Update() {
 		CalculateVelocity ();
+		if(!isDashing)
+        {
+			controller.Move (velocity * Time.deltaTime, directionalInput);
 
-		controller.Move (velocity * Time.deltaTime, directionalInput);
-
-		if (controller.collisions.above || controller.collisions.below) {
-			if (controller.collisions.slidingDownMaxSlope) {
-				velocity.y += controller.collisions.slopeNormal.y * -gravity * Time.deltaTime;
-			} else {
-				velocity.y = 0;
+			if (controller.collisions.above || controller.collisions.below) {
+				if (controller.collisions.slidingDownMaxSlope) {
+					velocity.y += controller.collisions.slopeNormal.y * -gravity * Time.deltaTime;
+				} else {
+					velocity.y = 0;
+				}
 			}
+        }
+		if(isDashing)
+        {
+			gravity = 0;
+			controller.Move(targetDash * Time.deltaTime * dashSpeed, directionalInput);
+        }
+        else
+        {
+			gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
 		}
-
 		updateAnimations();
 	}
 
@@ -81,6 +102,11 @@ public class Player : Entity, IDamagable {
         {
 			animeThor.SetBool("isGrounded", false);
 		}
+
+        if(Mathf.Abs(transform.position.x - targetDashPosition.x) < 1f)
+		{
+			isDashing = false;
+        }
     }
 	public void OnJumpInputDown() {
 		if (controller.collisions.below) 
@@ -155,11 +181,11 @@ public class Player : Entity, IDamagable {
 
 	public void lightAttack()
     {
-		if((animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.robotWalk") || animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Idle")))
-        {
+		//if((animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.robotWalk") || animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Idle")))
+        //{
 			animeThor.gameObject.tag = "Attack";
 			animeThor.Play("Base Layer.lightAttack", 0, 0);
-        }
+        //}
 	}
 
 	public void OnDownTilt()
@@ -169,14 +195,18 @@ public class Player : Entity, IDamagable {
 
 	public void dashAttack()
     {
-    }
+		isDashing = true;
+		animeThor.Play("Base Layer.dashing", 0, 0);
+		targetDash = new Vector2((directionalInput.x * dashLength),0);
+		targetDashPosition = new Vector2(transform.position.x + (directionalInput.x * dashLength), 0);
+	}
 	public void downTilt()
     {
-		if (controller.collisions.below && (animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.robotWalk") || animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Idle")))
-		{
+		//if (controller.collisions.below && (animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.robotWalk") || animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Idle")))
+		//{
 			animeThor.gameObject.tag = "downTilt";
 			animeThor.Play("Base Layer.downTilt", 0, 0);
-		}
+		//}
 	}
 
 	public override void gameOver()
@@ -188,14 +218,5 @@ public class Player : Entity, IDamagable {
 		Gizmos.matrix = transform.localToWorldMatrix;
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireCube(Vector3.right + (0.5f * Vector3.up), jabSize);
-	}
-
-	protected IEnumerator DashAttackCoroutine()
-    {
-		while (transform.position != transform.position + new Vector3(Mathf.Sign(directionalInput.x) * dashLength, 0, 0))
-		{
-			transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(Mathf.Sign(directionalInput.x) * dashLength, 0, 0), 0.5f);
-			yield return new WaitForEndOfFrame();
-		}
 	}
 }
