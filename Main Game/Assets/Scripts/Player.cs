@@ -137,7 +137,7 @@ public class Player : Entity, IDamagable {
     {
 		if(canAttack())
         {
-            if (controller.collisions.below)
+            if (controller.collisions.below || directionalInput == Vector2.zero)
             {
 				lightAttack();
             }
@@ -190,8 +190,19 @@ public class Player : Entity, IDamagable {
 
 	public void OnDownTilt()
     {
-		downTilt();
-    }
+		if (controller.collisions.below)
+		{
+			downTilt();
+		}
+		else
+		{
+			if (Time.time > dashCooldown)
+			{
+				dashAttack();
+				dashCooldown = Time.time + 1f;
+			}
+		}
+	}
 
 	public void dashAttack()
     {

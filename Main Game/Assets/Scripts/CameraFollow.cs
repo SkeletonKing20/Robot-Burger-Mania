@@ -10,7 +10,7 @@ public class CameraFollow : MonoBehaviour {
 
 	void Start() 
 	{
-		lookSmoothTime = 0.2f;
+		lookSmoothTime = 0.1f;
 		smoothLookVelocity = Vector3.zero;
 	}
 
@@ -19,7 +19,7 @@ public class CameraFollow : MonoBehaviour {
         {
 			Vector3 targetPosition;
 			targetPosition.x = target.transform.position.x + 5f;
-			targetPosition.y = target.transform.position.y + 0.95f;
+			targetPosition.y = target.transform.position.y + 3.802911f;
 			targetPosition.z = -10;
 
 			transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref smoothLookVelocity, lookSmoothTime);
