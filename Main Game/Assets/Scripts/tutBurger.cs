@@ -43,29 +43,16 @@ public class tutBurger : Enemy
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void abandonShip()
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Attack(damage);
-        }
-        if (collision.gameObject.CompareTag("Attack"))
-        {
-            TakeAHit(1);
-        }
-        if (collision.gameObject.CompareTag("downTilt"))
-        {
-            animeThor.Play("Base Layer.tutBurgerHit", 0, 0);
-            getHitForDamage(1);
-            hopping = false;
-            _rigidbody.AddForce(new Vector2(0, 8), ForceMode2D.Impulse);
-        }
+        spriteR.flipX = true;
+        speed *= 2;
+        isFleeing = true;
+        isInvincible = true;
     }
-    private void OnTriggerStay2D(Collider2D collision)
+
+    public override void gameOver()
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Attack(damage);
-        }
+        abandonShip();
     }
 }

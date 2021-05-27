@@ -68,7 +68,7 @@ public virtual void Attack(int damage)
             currentHp -= damage;
             if (currentHp <= 0)
             {
-                abandonShip();
+                gameOver();
             }
         }
     }
@@ -80,25 +80,54 @@ public virtual void Attack(int damage)
             currentHp -= damage;
             if (currentHp <= 0)
             {
-                abandonShip();
+                gameOver();
             }
         }
     }
 
     public void TakeAHit(int damage)
     {
-        animeThor.Play("Base Layer.tutBurgerHit", 0, 0);
+        animeThor.SetTrigger("TakeDamage");
         getHitForDamage(damage);
         player.hitConnect = true;
         Vector2 direction = (transform.position - player.transform.position).normalized.x * Vector2.right;
         StartCoroutine(InvincibilityCoroutine(1f, direction, 1));
     }
 
-    public void abandonShip()
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        spriteR.flipX  = true;
-        speed *= 2;
-        isFleeing = true;
-        isInvincible = true;
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Attack(damage);
+        }
+        if (collision.gameObject.CompareTag("Attack"))
+        {
+            TakeAHit(1);
+        }
+        if (collision.gameObject.CompareTag("downTilt"))
+        {
+            animeThor.SetTrigger("TakeDamage");
+            getHitForDamage(1);
+            hopping = false;
+            _rigidbody.AddForce(new Vector2(0, 8), ForceMode2D.Impulse);
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Attack(damage);
+        }
+    }
+
+    public override void gameOver()
+    {
+        animeThor.SetTrigger("Die");
+        if (!animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Death"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

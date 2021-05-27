@@ -21,10 +21,7 @@ public abstract class Entity : MonoBehaviour, IDamagable
             StartCoroutine(InvincibilityCoroutine(1f, direction, 1));
         }
     }
-    public virtual void gameOver()
-    {
-
-    }
+    public abstract void gameOver();
 
     protected IEnumerator InvincibilityCoroutine(float duration, Vector2 direction, int knockback)
     {
