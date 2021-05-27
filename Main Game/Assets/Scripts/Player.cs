@@ -106,12 +106,13 @@ public class Player : Entity, IDamagable {
         if(Mathf.Abs(transform.position.x - targetDashPosition.x) < 1f)
 		{
 			isDashing = false;
+			isInvincible = false;
         }
     }
 	public void OnJumpInputDown() {
 		if (controller.collisions.below) 
 		{
-			animeThor.Play("Base Layer.Jump", 0, 0);
+			animeThor.SetTrigger("Jump");
 			if (controller.collisions.slidingDownMaxSlope) 
 			{
 				if (directionalInput.x != -Mathf.Sign (controller.collisions.slopeNormal.x)) 
@@ -184,7 +185,7 @@ public class Player : Entity, IDamagable {
 		//if((animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.robotWalk") || animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Idle")))
         //{
 			animeThor.gameObject.tag = "Attack";
-			animeThor.Play("Base Layer.lightAttack", 0, 0);
+			animeThor.SetTrigger("lightAttack");
         //}
 	}
 
@@ -207,7 +208,8 @@ public class Player : Entity, IDamagable {
 	public void dashAttack()
     {
 		isDashing = true;
-		animeThor.Play("Base Layer.dashing", 0, 0);
+		isInvincible = true;
+		animeThor.SetTrigger("dashAttack");
 		targetDash = new Vector2((directionalInput.x * dashLength),0);
 		targetDashPosition = new Vector2(transform.position.x + (directionalInput.x * dashLength), 0);
 	}
@@ -216,10 +218,24 @@ public class Player : Entity, IDamagable {
 		//if (controller.collisions.below && (animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.robotWalk") || animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Idle")))
 		//{
 			animeThor.gameObject.tag = "downTilt";
-			animeThor.Play("Base Layer.downTilt", 0, 0);
+			animeThor.SetTrigger("downTilt");
 		//}
 	}
 
+	public override void getHitForDamage(int damage, Transform attacker, int knockback)
+    {
+		if(!isInvincible)
+        {
+			animeThor.SetTrigger("takeDamage");
+			currentHp -= damage;
+			if(currentHp <= 0)
+			{
+				gameOver();
+			}
+			Vector2 direction = (transform.position - attacker.transform.position).normalized.x * Vector2.right;
+			StartCoroutine(InvincibilityCoroutine(1f, direction, knockback));
+        }
+    }
 	public override void gameOver()
     {
 
