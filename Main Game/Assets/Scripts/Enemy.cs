@@ -15,13 +15,15 @@ public class Enemy : Entity, IDamagable
     protected SpriteRenderer spriteR;
     protected bool isFleeing;
     protected int knockback;
-    
+    protected bool isDead;
+    public float knockbackTaken;
     public virtual void Start()
     {
         player = FindObjectOfType<Player>();
         _rigidbody = GetComponent<Rigidbody2D>();
         animeThor = GetComponentInChildren<Animator>();
         spriteR = GetComponentInChildren<SpriteRenderer>();
+        knockbackTaken = player.dashLength;
     }
     public void moveRight()
     {
@@ -73,7 +75,7 @@ public virtual void Attack(int damage)
         }
     }
 
-    public override void getHitForDamage(int damage, Transform attacker, int knockback)
+    public override void getHitForDamage(int damage, Transform attacker, float knockback)
     {
         if (!isInvincible)
         {
@@ -87,31 +89,35 @@ public virtual void Attack(int damage)
 
     public void TakeAHit(int damage)
     {
-        animeThor.SetTrigger("TakeDamage");
+        animeThor?.SetTrigger("TakeDamage");
         getHitForDamage(damage);
         player.hitConnect = true;
         Vector2 direction = (transform.position - player.transform.position).normalized.x * Vector2.right;
-        StartCoroutine(InvincibilityCoroutine(1f, direction, 1));
+        StartCoroutine(InvincibilityCoroutine(1f, direction, knockbackTaken));
     }
 
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (!isInvincible)
         {
-            Attack(damage);
-        }
-        if (collision.gameObject.CompareTag("Attack"))
-        {
-            TakeAHit(1);
-        }
-        if (collision.gameObject.CompareTag("downTilt"))
-        {
-            animeThor.SetTrigger("TakeDamage");
-            getHitForDamage(1);
-            hopping = false;
-            _rigidbody.AddForce(new Vector2(0, 8), ForceMode2D.Impulse);
+
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                Attack(damage);
+            }
+            if (collision.gameObject.CompareTag("Attack"))
+            {
+                TakeAHit(1);
+            }
+            if (collision.gameObject.CompareTag("downTilt"))
+            {
+                animeThor.SetTrigger("TakeDamage");
+                getHitForDamage(1);
+                hopping = false;
+                _rigidbody.AddForce(new Vector2(0, 8), ForceMode2D.Impulse);
+            }
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
@@ -124,10 +130,8 @@ public virtual void Attack(int damage)
 
     public override void gameOver()
     {
-        animeThor.SetTrigger("Die");
-        if (!animeThor.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Death"))
-        {
-            Destroy(gameObject);
-        }
+        isInvincible = true;
+        isDead = true;
+        animeThor.SetTrigger("Die");     
     }
 }

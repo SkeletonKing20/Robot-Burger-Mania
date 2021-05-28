@@ -7,7 +7,7 @@ public abstract class Entity : MonoBehaviour, IDamagable
     protected int currentHp;
     protected int maxHp;
     protected bool isInvincible;
-    public abstract void getHitForDamage(int damage, Transform attacker, int knockback);
+    public abstract void getHitForDamage(int damage, Transform attacker, float knockback);
     public virtual void getHitForDamage(int damage)
     {
         if (!isInvincible)
@@ -18,12 +18,12 @@ public abstract class Entity : MonoBehaviour, IDamagable
                 gameOver();
             }
             Vector2 direction = Vector2.right;
-            StartCoroutine(InvincibilityCoroutine(1f, direction, 1));
+            StartCoroutine(InvincibilityCoroutine(1f, direction, 1f));
         }
     }
     public abstract void gameOver();
 
-    protected IEnumerator InvincibilityCoroutine(float duration, Vector2 direction, int knockback)
+    protected IEnumerator InvincibilityCoroutine(float duration, Vector2 direction, float knockback)
     {
 
         isInvincible = true;

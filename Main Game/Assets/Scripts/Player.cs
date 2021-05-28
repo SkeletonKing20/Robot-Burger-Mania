@@ -107,7 +107,8 @@ public class Player : Entity, IDamagable {
 		{
 			isDashing = false;
 			isInvincible = false;
-        }
+			animeThor.gameObject.tag = "Attack";
+		}
     }
 	public void OnJumpInputDown() {
 		if (controller.collisions.below) 
@@ -209,6 +210,7 @@ public class Player : Entity, IDamagable {
     {
 		isDashing = true;
 		isInvincible = true;
+		animeThor.gameObject.tag = "Attack";
 		animeThor.SetTrigger("dashAttack");
 		targetDash = new Vector2((directionalInput.x * dashLength),0);
 		targetDashPosition = new Vector2(transform.position.x + (directionalInput.x * dashLength), 0);
@@ -222,7 +224,7 @@ public class Player : Entity, IDamagable {
 		//}
 	}
 
-	public override void getHitForDamage(int damage, Transform attacker, int knockback)
+	public override void getHitForDamage(int damage, Transform attacker, float knockback)
     {
 		if(!isInvincible)
         {
@@ -233,7 +235,7 @@ public class Player : Entity, IDamagable {
 				gameOver();
 			}
 			Vector2 direction = (transform.position - attacker.transform.position).normalized.x * Vector2.right;
-			StartCoroutine(InvincibilityCoroutine(1f, direction, knockback));
+			StartCoroutine(InvincibilityCoroutine(1f, direction.normalized, knockback));
         }
     }
 	public override void gameOver()
