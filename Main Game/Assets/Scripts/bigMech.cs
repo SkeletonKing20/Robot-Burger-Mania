@@ -24,6 +24,9 @@ public class bigMech : Enemy
 
     public void Bite()
     {
-        animeThor.SetTrigger("Attack");
+        if(animeThor != null)
+        {
+            animeThor.SetTrigger("Attack");
+        }
     }
 }
