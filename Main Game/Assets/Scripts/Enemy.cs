@@ -109,6 +109,7 @@ public virtual void Attack(int damage)
             }
             if (collision.gameObject.CompareTag("Attack"))
             {
+                knockbackTaken = 0;
                 TakeAHit(1);
             }
             if (collision.gameObject.CompareTag("downTilt"))
