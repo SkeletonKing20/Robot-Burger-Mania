@@ -2,24 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class backGroundParallax : MonoBehaviour
+public class ParallaxBackground : MonoBehaviour 
 {
     [SerializeField]
-    private Vector2 parallaxMultiplier;
+    private Vector2 parallaxEffectMultiplier;
 
     private Transform cameraTransform;
     private Vector3 lastCameraPosition;
 
-    private void Start()
+    private void Start() 
     {
         cameraTransform = Camera.main.transform;
         lastCameraPosition = cameraTransform.position;
     }
 
-    private void LateUpdate()
+    private void LateUpdate() 
     {
         Vector3 deltaMovement = cameraTransform.position - lastCameraPosition;
-        transform.position += new Vector3(deltaMovement.x * parallaxMultiplier.x, deltaMovement.y * parallaxMultiplier.y);
+        transform.position += new Vector3(deltaMovement.x * parallaxEffectMultiplier.x, deltaMovement.y * parallaxEffectMultiplier.y);
         lastCameraPosition = cameraTransform.position;
     }
 }
