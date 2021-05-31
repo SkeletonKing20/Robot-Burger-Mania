@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class Entity : MonoBehaviour, IDamagable
 {
-    protected int currentHp;
-    protected int maxHp;
+    public float currentHp;
+    public float maxHp;
     protected bool isInvincible;
     public abstract void getHitForDamage(int damage, Transform attacker, float knockback);
     public virtual void getHitForDamage(int damage)
@@ -13,10 +13,6 @@ public abstract class Entity : MonoBehaviour, IDamagable
         if (!isInvincible)
         {
             currentHp -= damage;
-            if (currentHp <= 0)
-            {
-                gameOver();
-            }
             Vector2 direction = Vector2.right;
             StartCoroutine(InvincibilityCoroutine(1f, direction, 1f));
         }
@@ -38,5 +34,12 @@ public abstract class Entity : MonoBehaviour, IDamagable
     public float getDistanceFromObject(GameObject obj)
     {
         return Mathf.Abs((obj.transform.position.x) - transform.position.x);
+    }
+    public void checkForDeath()
+    {
+        if (currentHp <= 0)
+        {
+            gameOver();
+        }
     }
 }

@@ -7,23 +7,29 @@ public class CameraFollow : MonoBehaviour {
 	public float lookSmoothTime;
 	bool locked;
 	private Vector3 smoothLookVelocity;
+	Vector3 lastCameraPosition;
 	Vector3 targetPosition;
 	void Start() 
 	{
 		lookSmoothTime = 0.1f;
 		smoothLookVelocity = Vector3.zero;
 		transform.position = new Vector3(0,target.transform.position.y + 3.802911f,0);
+		lastCameraPosition = transform.position;
 	}
 
 	void Update() {
         if (!locked)
         {
-
 			targetPosition.x = target.transform.position.x + 5f;
 
 			targetPosition.z = -10;
 
 			transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref smoothLookVelocity, lookSmoothTime);
 		}
+		//if(targetPosition.x - 5f < -6.65f)
+  //      {
+		//	transform.position = new Vector3(-6.65f, transform.position.y, -10);
+  //      }
+		//lastCameraPosition = transform.position;
 	}
 }

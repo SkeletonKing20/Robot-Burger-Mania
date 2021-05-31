@@ -9,7 +9,7 @@ public class tutBurger : Enemy
         base.Start();
         maxHp = 3;
         currentHp = maxHp;
-        knockback = 5;
+        knockback = 1;
     }
 
     public virtual void Update()

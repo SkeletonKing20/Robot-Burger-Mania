@@ -9,7 +9,7 @@ public class bigMech : Enemy
         base.Start();
         maxHp = 10;
         currentHp = maxHp;
-        knockback = 10;
+        knockback = 3;
         damage = 2;
     }
     public void Update()

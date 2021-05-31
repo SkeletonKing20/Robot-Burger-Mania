@@ -36,7 +36,12 @@ public class Player : Entity, IDamagable {
 	Animator animeThor;
 	Controller2D controller;
 	SpriteRenderer spriteR;
-	void Start() {
+
+    private void Awake()
+    {
+		maxHp = 10;
+    }
+    void Start() {
 		controller = GetComponent<Controller2D> ();
 		animeThor = GetComponentInChildren<Animator>();
 		spriteR = GetComponentInChildren<SpriteRenderer>();
@@ -44,10 +49,11 @@ public class Player : Entity, IDamagable {
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (gravity) * minJumpHeight);
 		jabSize = new Vector3(2.5f, 0.5f, 0);
-		currentHp = maxHp;
+		currentHp = 10;
 	}
 
 	void Update() {
+		checkForDeath();
 		CalculateVelocity ();
 		if(!isDashing)
         {
@@ -230,17 +236,13 @@ public class Player : Entity, IDamagable {
         {
 			animeThor.SetTrigger("takeDamage");
 			currentHp -= damage;
-			if(currentHp <= 0)
-			{
-				gameOver();
-			}
 			Vector2 direction = (transform.position - attacker.transform.position).normalized.x * Vector2.right;
 			StartCoroutine(InvincibilityCoroutine(1f, direction.normalized, knockback));
         }
     }
 	public override void gameOver()
     {
-
+		animeThor.SetTrigger("isDead");
     }
     private void OnDrawGizmos()
     {
