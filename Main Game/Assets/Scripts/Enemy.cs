@@ -17,13 +17,14 @@ public class Enemy : Entity, IDamagable
     protected int knockback;
     protected bool isDead;
     public float knockbackTaken;
+    public float initialKnockbackTaken = 1;
     public virtual void Start()
     {
         player = FindObjectOfType<Player>();
         _rigidbody = GetComponent<Rigidbody2D>();
         animeThor = GetComponentInChildren<Animator>();
         spriteR = GetComponentInChildren<SpriteRenderer>();
-        knockbackTaken = player.dashLength;
+        knockbackTaken = initialKnockbackTaken;
     }
     public void moveRight()
     {
@@ -111,6 +112,11 @@ public virtual void Attack(int damage)
             {
                 knockbackTaken = 0;
                 TakeAHit(1);
+            }
+            if (collision.gameObject.CompareTag("heavyAttack"))
+            {
+                knockbackTaken = initialKnockbackTaken * 2;
+                TakeAHit(2);
             }
             if (collision.gameObject.CompareTag("downTilt"))
             {

@@ -26,17 +26,17 @@ public class Player : Entity, IDamagable {
 	Vector2 targetDash;
 	Vector2 targetDashPosition;
 	public float dashSpeed = 3f;
-	bool isDashing;
+	public bool isDashing;
 	public float dashLength = 5f;
 	public float dashCooldown;
 	
-	Vector3 scaleLeft = new Vector3(-1,1,1);
-	Vector3 scaleRight = new Vector3(1,1,1);
+	Vector3 scaleLeft = new Vector3(-0.5f,0.5f,1);
+	Vector3 scaleRight = new Vector3(0.5f, 0.5f, 1);
 	
 	Animator animeThor;
 	Controller2D controller;
 	SpriteRenderer spriteR;
-
+	BoxCollider2D box2D;
     private void Awake()
     {
 		maxHp = 10;
@@ -45,6 +45,7 @@ public class Player : Entity, IDamagable {
 		controller = GetComponent<Controller2D> ();
 		animeThor = GetComponentInChildren<Animator>();
 		spriteR = GetComponentInChildren<SpriteRenderer>();
+		box2D = GetComponentInChildren<BoxCollider2D>();
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (gravity) * minJumpHeight);
@@ -87,12 +88,12 @@ public class Player : Entity, IDamagable {
     {
         if (directionalInput.x > 0)
         {
-			transform.localScale = scaleRight;
+			spriteR.gameObject.transform.localScale = scaleRight;
 			animeThor.SetBool("isWalking", true);
         }
 		else if(directionalInput.x < 0)
         {
-			transform.localScale = scaleLeft;
+			spriteR.gameObject.transform.localScale = scaleLeft;
 			animeThor.SetBool("isWalking", true);
 		}
 		else
@@ -113,7 +114,6 @@ public class Player : Entity, IDamagable {
 		{
 			isDashing = false;
 			isInvincible = false;
-			animeThor.gameObject.tag = "Attack";
 		}
     }
 	public void OnJumpInputDown() {
@@ -175,7 +175,8 @@ public class Player : Entity, IDamagable {
 	}
 	public void OnMouseRightDown()
 	{
-		
+		animeThor.gameObject.tag = "heavyAttack";
+		animeThor.SetTrigger("heavyAttack");
 	}
 	public void OnSInputUp()
 	{
@@ -236,6 +237,7 @@ public class Player : Entity, IDamagable {
         {
 			animeThor.SetTrigger("takeDamage");
 			currentHp -= damage;
+			checkForDeath();
 			Vector2 direction = (transform.position - attacker.transform.position).normalized.x * Vector2.right;
 			StartCoroutine(InvincibilityCoroutine(1f, direction.normalized, knockback));
         }

@@ -20,12 +20,6 @@ public class PlayerInput : MonoBehaviour {
 		if (Input.GetKeyUp (KeyCode.Space)) {
 			player.OnJumpInputUp ();
 		}
-        if (Input.GetKeyDown (KeyCode.S))
-        {
-        }
-		if (Input.GetKeyUp(KeyCode.S))
-		{
-		}
 		if (Input.GetKeyDown(KeyCode.Mouse0) && !Input.GetKey(KeyCode.S))
 		{
 			player.OnMouseLeftDown();
@@ -38,5 +32,9 @@ public class PlayerInput : MonoBehaviour {
         {
 			player.OnDownTilt();
         }
+
+		if (Input.GetKey(KeyCode.W) && Input.GetKeyDown(KeyCode.Mouse0))
+		{
+		}
 	}
 }

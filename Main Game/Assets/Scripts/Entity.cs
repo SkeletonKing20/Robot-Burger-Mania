@@ -6,7 +6,7 @@ public abstract class Entity : MonoBehaviour, IDamagable
 {
     public float currentHp;
     public float maxHp;
-    protected bool isInvincible;
+    public bool isInvincible;
     public abstract void getHitForDamage(int damage, Transform attacker, float knockback);
     public virtual void getHitForDamage(int damage)
     {
@@ -37,7 +37,7 @@ public abstract class Entity : MonoBehaviour, IDamagable
     }
     public void checkForDeath()
     {
-        if (currentHp <= 0)
+        if (this.currentHp <= 0)
         {
             gameOver();
         }

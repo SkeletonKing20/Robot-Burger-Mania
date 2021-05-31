@@ -13,23 +13,28 @@ public class CameraFollow : MonoBehaviour {
 	{
 		lookSmoothTime = 0.1f;
 		smoothLookVelocity = Vector3.zero;
-		transform.position = new Vector3(0,target.transform.position.y + 3.802911f,0);
+		transform.position = new Vector3(0,1,-10);
 		lastCameraPosition = transform.position;
 	}
 
 	void Update() {
-        if (!locked)
-        {
-			targetPosition.x = target.transform.position.x + 5f;
-
-			targetPosition.z = -10;
-
-			transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref smoothLookVelocity, lookSmoothTime);
+		Debug.Log(target.transform.position);
+		if (transform.position.x >= 0 && !locked)
+		{
+			followPlayer();
 		}
-		//if(targetPosition.x - 5f < -6.65f)
-  //      {
-		//	transform.position = new Vector3(-6.65f, transform.position.y, -10);
-  //      }
-		//lastCameraPosition = transform.position;
+		if (transform.position.x < 0)
+		{
+			transform.position = new Vector3(0, 1, -10);
+		}
+	}
+
+	public void followPlayer()
+    {
+		targetPosition.x = target.transform.position.x + 5f;
+
+		targetPosition.z = -10;
+
+		transform.position = Vector3.SmoothDamp(transform.position, new Vector3(targetPosition.x, 1, -10), ref smoothLookVelocity, lookSmoothTime);
 	}
 }
