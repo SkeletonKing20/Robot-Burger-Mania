@@ -49,7 +49,6 @@ public class Player : Entity, IDamagable {
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (gravity) * minJumpHeight);
-		jabSize = new Vector3(2.5f, 0.5f, 0);
 		currentHp = maxHp;
 	}
 
