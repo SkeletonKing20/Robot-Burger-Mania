@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: a3c42f17c8e170141a85a7ac238f6693
+guid: 3168149467b26cf4b9711a8355f240ee
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7614180675578911193
-    second: protagjump_0
+      213: 8132401456616291313
+    second: bigmac_death_spritesheet_0
   - first:
-      213: -7527596164175008485
-    second: protagjump_1
+      213: 195382534834247878
+    second: bigmac_death_spritesheet_1
   - first:
-      213: -3838912190471802872
-    second: protagjump_2
+      213: -3309600699140168966
+    second: bigmac_death_spritesheet_2
   - first:
-      213: -7063563984503172191
-    second: protagjump_3
+      213: 5109832057618226334
+    second: bigmac_death_spritesheet_3
   - first:
-      213: 8071130817141394595
-    second: protagjump_4
+      213: 6429162019904434770
+    second: bigmac_death_spritesheet_4
   - first:
-      213: 6394347649375994216
-    second: protagjump_5
+      213: 726382540700690885
+    second: bigmac_death_spritesheet_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -64,7 +64,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 200
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -107,12 +107,54 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: protagjump_0
+      name: bigmac_death_spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1800
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fbbb7899081cd070800000000000000
+      internalID: 8132401456616291313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bigmac_death_spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 1800
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c85c18516326b200800000000000000
+      internalID: 195382534834247878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bigmac_death_spritesheet_2
       rect:
         serializedVersion: 2
         x: 0
         y: 900
-        width: 600
+        width: 900
         height: 900
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -121,19 +163,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 726a978640ff45690800000000000000
-      internalID: -7614180675578911193
+      spriteID: af2ad5bf2bfe112d0800000000000000
+      internalID: -3309600699140168966
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: protagjump_1
+      name: bigmac_death_spritesheet_3
       rect:
         serializedVersion: 2
-        x: 600
+        x: 900
         y: 900
-        width: 600
+        width: 900
         height: 900
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -142,40 +184,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1d61cdeb2b988790800000000000000
-      internalID: -7527596164175008485
+      spriteID: e9cdc30fe25c9e640800000000000000
+      internalID: 5109832057618226334
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: protagjump_2
-      rect:
-        serializedVersion: 2
-        x: 1200
-        y: 900
-        width: 600
-        height: 900
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 800f203c3b179bac0800000000000000
-      internalID: -3838912190471802872
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: protagjump_3
+      name: bigmac_death_spritesheet_4
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 600
+        width: 900
         height: 900
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -184,19 +205,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a3127ffafd29fd90800000000000000
-      internalID: -7063563984503172191
+      spriteID: 25236df3bc8f83950800000000000000
+      internalID: 6429162019904434770
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: protagjump_4
+      name: bigmac_death_spritesheet_5
       rect:
         serializedVersion: 2
-        x: 600
+        x: 900
         y: 0
-        width: 600
+        width: 900
         height: 900
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -205,29 +226,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3accb6b27ba620070800000000000000
-      internalID: 8071130817141394595
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: protagjump_5
-      rect:
-        serializedVersion: 2
-        x: 1200
-        y: 0
-        width: 600
-        height: 900
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8610963fe494db850800000000000000
-      internalID: 6394347649375994216
+      spriteID: 5c9a28d7211a41a00800000000000000
+      internalID: 726382540700690885
       vertices: []
       indices: 
       edges: []

@@ -24,14 +24,14 @@ public class Player : Entity, IDamagable {
 	public bool hitConnect;
 	Vector3 jabSize;
 	Vector2 targetDash;
+	Vector2 targetKnockedBack;
 	Vector2 targetDashPosition;
 	public float dashSpeed = 3f;
 	public bool isDashing;
 	public float dashLength = 5f;
 	public float dashCooldown;
+	public bool isKnockedBack;
 	
-	Vector3 scaleLeft = new Vector3(-0.5f,0.5f,1);
-	Vector3 scaleRight = new Vector3(0.5f, 0.5f, 1);
 	
 	Animator animeThor;
 	Controller2D controller;
@@ -50,13 +50,12 @@ public class Player : Entity, IDamagable {
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (gravity) * minJumpHeight);
 		jabSize = new Vector3(2.5f, 0.5f, 0);
-		currentHp = 10;
+		currentHp = maxHp;
 	}
 
 	void Update() {
-		checkForDeath();
 		CalculateVelocity ();
-		if(!isDashing)
+		if(!isDashing && !isKnockedBack)
         {
 			controller.Move (velocity * Time.deltaTime, directionalInput);
 
@@ -88,12 +87,12 @@ public class Player : Entity, IDamagable {
     {
         if (directionalInput.x > 0)
         {
-			spriteR.gameObject.transform.localScale = scaleRight;
+			animeThor.gameObject.transform.localScale = scaleRight;
 			animeThor.SetBool("isWalking", true);
         }
 		else if(directionalInput.x < 0)
         {
-			spriteR.gameObject.transform.localScale = scaleLeft;
+			animeThor.gameObject.transform.localScale = scaleLeft;
 			animeThor.SetBool("isWalking", true);
 		}
 		else
@@ -239,11 +238,17 @@ public class Player : Entity, IDamagable {
 			currentHp -= damage;
 			checkForDeath();
 			Vector2 direction = (transform.position - attacker.transform.position).normalized.x * Vector2.right;
-			StartCoroutine(InvincibilityCoroutine(1f, direction.normalized, knockback));
+			StartCoroutine(InvincibilityCoroutine(2f, direction.normalized, knockback));
+			StartCoroutine(knockBackCoroutine(0.2f, direction.normalized, knockback));
+        }
+        if (checkForDeath())
+        {
+			gameOver();
         }
     }
 	public override void gameOver()
     {
+		isInvincible = true;
 		animeThor.SetTrigger("isDead");
     }
     private void OnDrawGizmos()
@@ -251,5 +256,26 @@ public class Player : Entity, IDamagable {
 		Gizmos.matrix = transform.localToWorldMatrix;
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireCube(Vector3.right + (0.5f * Vector3.up), jabSize);
+	}
+
+    public override IEnumerator InvincibilityCoroutine(float duration, Vector2 direction, float knockback)
+	{
+		isInvincible = true;
+		for (float t = 0; t < duration; t += Time.deltaTime)
+		{
+			yield return new WaitForEndOfFrame();
+		}
+		isInvincible = false;
+	}
+	public IEnumerator knockBackCoroutine(float duration, Vector2 direction, float knockback)
+    {
+		isKnockedBack = true;
+		targetKnockedBack = new Vector2(knockback * direction.x, 0);
+		for (float t = 0; t<duration; t += Time.deltaTime)
+		{
+			controller.Move(targetKnockedBack * Time.deltaTime * dashSpeed, directionalInput);
+			yield return new WaitForEndOfFrame();
+		}
+		isKnockedBack = false;
 	}
 }
