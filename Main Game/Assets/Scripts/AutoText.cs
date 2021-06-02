@@ -24,7 +24,6 @@ public class AutoText : MonoBehaviour
             textLabel.text = textToType.Substring(0, charIndex);
             yield return null;
         }
-
         textLabel.text = textToType;
     }
 }
