@@ -8,6 +8,6 @@ public class MonologScript : StateMachineBehaviour
     string currentText = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        text.WriteCurrentText(currentText);
+        //text.WriteCurrentText(currentText);
     }
 }
