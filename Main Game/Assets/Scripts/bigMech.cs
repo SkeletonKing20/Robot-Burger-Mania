@@ -28,6 +28,7 @@ public class bigMech : Enemy
             }
             if (player.transform.position.x < transform.position.x)
             {
+                Debug.Log(scaleRight);
                 animeThor.transform.localScale = scaleRight;
                 moveLeft();
             }
