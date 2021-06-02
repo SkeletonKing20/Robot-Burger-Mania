@@ -259,6 +259,7 @@ public class Player : Entity, IDamagable {
 
     public override IEnumerator InvincibilityCoroutine(float duration, Vector2 direction, float knockback)
 	{
+
 		isInvincible = true;
 		for (float t = 0; t < duration; t += Time.deltaTime)
 		{
@@ -268,11 +269,15 @@ public class Player : Entity, IDamagable {
 	}
 	public IEnumerator knockBackCoroutine(float duration, Vector2 direction, float knockback)
     {
+		if (direction.x == 0)
+		{
+			direction = new Vector2(-1, 0);
+		}
 		isKnockedBack = true;
 		targetKnockedBack = new Vector2(knockback * direction.x, 0);
 		for (float t = 0; t<duration; t += Time.deltaTime)
 		{
-			controller.Move(targetKnockedBack * Time.deltaTime * dashSpeed, directionalInput);
+			controller.Move(targetKnockedBack * Time.deltaTime * dashSpeed, direction);
 			yield return new WaitForEndOfFrame();
 		}
 		isKnockedBack = false;

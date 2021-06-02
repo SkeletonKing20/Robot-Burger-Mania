@@ -10,29 +10,59 @@ public class chickenWingBurger : Enemy
     float currentAttackCoolDown;
     float attackCoolDown;
 
-    bool isDiving;
-    public void enableDive()
+    float diveStep;
+
+    public bool isDiving;
+    public bool isSitting;
+
+    const float initialHeight = 2;
+    public override void Start()
     {
-        isDiving = true;
+        base.Start();
+        diveStep = speed * Time.deltaTime;
         currentPosition = transform.position;
-        targetPosition = player.transform.position;
+        cooldown = 5f;
+        knockback = 1;
     }
 
     private void Update()
     {
-        if (Time.time > currentAttackCoolDown && !isDiving)
+        returnToHeight(initialHeight);
+        if (!isSitting)
         {
-            enableDive();
-            currentAttackCoolDown = Time.time + attackCoolDown;
-        }
-        if(isDiving)
-        {
-            Dive();
+            if(Time.time > cooldown)
+            {
+                isDiving = true;
+                targetPosition = player.transform.position;
+                cooldown = Time.time + 5f;
+            }
+            if(isDiving)
+            {
+                Dive();
+            }
+            if (!isDiving)
+            {
+                returnToHeight(initialHeight);
+            }
+            currentPosition = transform.position;
         }
     }
 
+    public void returnToHeight(float height)
+    {
+        Vector3 target = new Vector3(currentPosition.x, height, 0);
+        if(transform.position.y < height)
+        {
+            Vector3.MoveTowards(currentPosition,target, diveStep);
+        }
+    }
     public void Dive()
     {
-
+        diveStep = speed * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(currentPosition, targetPosition, diveStep);
+        if(Mathf.Abs(transform.position.x - targetPosition.x) < 0.0001f)
+        {
+            isDiving = false;
+        }
     }
 }

@@ -18,7 +18,6 @@ public class CameraFollow : MonoBehaviour {
 	}
 
 	void Update() {
-		Debug.Log(target.transform.position);
 		if (transform.position.x >= 0 && !locked)
 		{
 			followPlayer();

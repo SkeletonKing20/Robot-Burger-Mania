@@ -24,7 +24,10 @@ public abstract class Entity : MonoBehaviour, IDamagable
 
     public virtual IEnumerator InvincibilityCoroutine(float duration, Vector2 direction, float knockback)
     {
-
+        if(direction == Vector2.zero)
+        {
+            direction = new Vector2(-1, 0);
+        }
         isInvincible = true;
         transform.Translate(direction * knockback);
         for (float t = 0; t < duration; t += Time.deltaTime)
