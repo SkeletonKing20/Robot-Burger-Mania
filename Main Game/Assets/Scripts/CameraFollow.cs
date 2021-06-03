@@ -15,6 +15,7 @@ public class CameraFollow : MonoBehaviour {
 		smoothLookVelocity = Vector3.zero;
 		transform.position = new Vector3(0,1,-10);
 		lastCameraPosition = transform.position;
+		target = FindObjectOfType<Player>().GetComponent<Controller2D>();
 	}
 
 	void Update() {
