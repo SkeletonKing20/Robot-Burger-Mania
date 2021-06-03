@@ -7,8 +7,10 @@ public abstract class Entity : MonoBehaviour, IDamagable
     public float currentHp;
     public float maxHp;
     public bool isInvincible;
-    protected Vector3 scaleLeft = new Vector3(-1f, 1f, 1);
-    protected Vector3 scaleRight = new Vector3(1f, 1f, 1);
+    public Vector3 scaleLeft = new Vector3(-1f, 1f, 1);
+    public Vector3 scaleRight = new Vector3(1f, 1f, 1);
+    [SerializeField]
+    protected Vector3 startingPosition;
     public abstract void getHitForDamage(int damage, Transform attacker, float knockback);
     public virtual void getHitForDamage(int damage)
     {

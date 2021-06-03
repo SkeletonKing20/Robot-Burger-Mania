@@ -31,8 +31,8 @@ public class Player : Entity, IDamagable {
 	public float dashLength = 5f;
 	public float dashCooldown;
 	public bool isKnockedBack;
-	
-	
+
+	Player[] players;
 	Animator animeThor;
 	Controller2D controller;
 	SpriteRenderer spriteR;
@@ -40,8 +40,15 @@ public class Player : Entity, IDamagable {
     private void Awake()
     {
 		maxHp = 10;
+		DontDestroyOnLoad(this);
     }
-    void Start() {
+    void Start() 
+	{
+		players = FindObjectsOfType<Player>();
+		if (players.Length > 1)
+		{
+			Destroy(this.gameObject);
+		}
 		controller = GetComponent<Controller2D> ();
 		animeThor = GetComponentInChildren<Animator>();
 		spriteR = GetComponentInChildren<SpriteRenderer>();

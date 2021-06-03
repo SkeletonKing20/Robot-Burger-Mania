@@ -18,6 +18,7 @@ public class Enemy : Entity, IDamagable
     protected bool isDead;
     public float knockbackTaken;
     public float initialKnockbackTaken = 1;
+    public float aggroRange;
     public virtual void Start()
     {
         player = FindObjectOfType<Player>();
@@ -25,6 +26,7 @@ public class Enemy : Entity, IDamagable
         animeThor = GetComponentInChildren<Animator>();
         spriteR = GetComponentInChildren<SpriteRenderer>();
         knockbackTaken = initialKnockbackTaken;
+        transform.position = startingPosition;
     }
     public void moveRight()
     {

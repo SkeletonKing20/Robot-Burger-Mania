@@ -18,30 +18,33 @@ public class bigMech : Enemy
     }
     public void Update()
     {
-        if (!isAttacking)
-        {
-            if (Time.time > cooldown && Mathf.Abs(_rigidbody.velocity.y) < 0.001f)
+        if (getDistanceFromObject(player.gameObject) < aggroRange)
+        { 
+            if (!isAttacking)
             {
-                _rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
-                cooldown = Time.time + 0.5f;
+                if (Time.time > cooldown && Mathf.Abs(_rigidbody.velocity.y) < 0.001f)
+                {
+                    _rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+                    cooldown = Time.time + 0.5f;
 
+                }
+                if (player.transform.position.x < transform.position.x)
+                {
+                    animeThor.transform.localScale = scaleRight;
+                    moveLeft();
+                }
+                else
+                {
+                    animeThor.transform.localScale = scaleLeft;
+                    moveRight();
+                }
             }
-            if (player.transform.position.x < transform.position.x)
+            if (Time.time > biteCoolDown)
             {
-                animeThor.transform.localScale = scaleRight;
-                moveLeft();
+                isAttacking = true;
+                Bite();
+                biteCoolDown = Time.time + 3f;
             }
-            else
-            {
-                animeThor.transform.localScale = scaleLeft;
-                moveRight();
-            }
-        }
-        if (Time.time > biteCoolDown)
-        {
-            isAttacking = true;
-            Bite();
-            biteCoolDown = Time.time + 3f;
         }
     }
 
