@@ -32,11 +32,13 @@ public class Player : Entity, IDamagable {
 	public float dashCooldown;
 	public bool isKnockedBack;
 
+	public gameOver gOver;
 	Player[] players;
 	Animator animeThor;
 	Controller2D controller;
 	SpriteRenderer spriteR;
 	BoxCollider2D box2D;
+	public bool isDead;
     private void Awake()
     {
 		maxHp = 10;
@@ -255,7 +257,9 @@ public class Player : Entity, IDamagable {
 	public override void gameOver()
     {
 		isInvincible = true;
+		isDead = true;
 		animeThor.SetTrigger("isDead");
+		gOver.gameObject.SetActive(true);
     }
     private void OnDrawGizmos()
     {
