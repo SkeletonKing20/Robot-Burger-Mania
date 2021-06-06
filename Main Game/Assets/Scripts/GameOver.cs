@@ -16,6 +16,5 @@ public class GameOver : StateMachineBehaviour
     IEnumerator GameOverScreen(float duration)
     {
         yield return new WaitForSeconds(duration);
-        Time.timeScale = 0;
     }
 }

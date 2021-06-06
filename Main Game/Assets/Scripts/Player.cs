@@ -32,20 +32,24 @@ public class Player : Entity, IDamagable {
 	public float dashCooldown;
 	public bool isKnockedBack;
 
-	public gameOver gOver;
 	Player[] players;
 	Animator animeThor;
 	Controller2D controller;
 	SpriteRenderer spriteR;
 	BoxCollider2D box2D;
 	public bool isDead;
-    private void Awake()
+
+	GameObject[] gOver;
+	GameHandlerScript gameHandler;
+	private void Awake()
     {
 		maxHp = 10;
 		DontDestroyOnLoad(this);
     }
     void Start() 
 	{
+		gOver = GameObject.FindGameObjectsWithTag("GameOver");
+		gameHandler = FindObjectOfType<GameHandlerScript>();
 		players = FindObjectsOfType<Player>();
 		if (players.Length > 1)
 		{
@@ -62,6 +66,7 @@ public class Player : Entity, IDamagable {
 	}
 
 	void Update() {
+        if (!gameHandler.isRunning) { return; }
 		CalculateVelocity ();
 		if(!isDashing && !isKnockedBack)
         {
@@ -256,10 +261,15 @@ public class Player : Entity, IDamagable {
     }
 	public override void gameOver()
     {
+		gOver = GameObject.FindGameObjectsWithTag("GameOver");
+		gameHandler.isRunning = false;
 		isInvincible = true;
 		isDead = true;
 		animeThor.SetTrigger("isDead");
-		gOver.gameObject.SetActive(true);
+        foreach (GameObject obj in gOver)
+        {
+			obj.transform.GetChild(0).gameObject.SetActive(true);
+        }
     }
     private void OnDrawGizmos()
     {

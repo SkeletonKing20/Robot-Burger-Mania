@@ -25,6 +25,7 @@ public abstract class NewEnemyScript : MonoBehaviour
     public Player player;
 
     public Coroutine coroutine;
+    protected GameHandlerScript gameHandler;
     private void Awake()
     {
         states = ENEMY_STATE.IDLE;
@@ -33,6 +34,7 @@ public abstract class NewEnemyScript : MonoBehaviour
 
     private void Start()
     {
+        gameHandler = FindObjectOfType<GameHandlerScript>();
         deltaStep = moveSpeed * Time.deltaTime;
         animator = GetComponentInChildren<Animator>();
         spriteR = GetComponentInChildren<SpriteRenderer>();

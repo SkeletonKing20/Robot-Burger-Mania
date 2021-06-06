@@ -75,10 +75,10 @@ public class ChickenWings : NewEnemyScript
     }
     public override IEnumerator EnemyFSM()
     {
-        while (/*Mathf.Abs(transform.position.x - player.transform.position.x) < aggroRange*/true)
+        while (gameHandler.isRunning)
         {
-            if (Random.value > .5 && transform.position.y > 4) { states = ENEMY_STATE.CHASE; }
-            yield return StartCoroutine(states.ToString());
+                if (Random.value > .5 && transform.position.y > 4) { states = ENEMY_STATE.CHASE; }
+                yield return StartCoroutine(states.ToString());
         }
     }
 
