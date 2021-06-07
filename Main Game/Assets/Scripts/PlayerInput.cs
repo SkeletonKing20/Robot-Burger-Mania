@@ -2,16 +2,19 @@
 using System.Collections;
 
 [RequireComponent (typeof (Player))]
-public class PlayerInput : MonoBehaviour {
+public class PlayerInput : MonoBehaviour 
+{
 
 	Player player;
 	GameHandlerScript gameHandler;
-	void Start () {
+	void Start () 
+	{
 		player = GetComponent<Player> ();
 		gameHandler = FindObjectOfType<GameHandlerScript>();
 	}
 
-	void Update () {
+	void Update () 
+	{
 		if (!gameHandler.isRunning) { return; }
 		Vector2 directionalInput = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 		player.SetDirectionalInput (directionalInput);

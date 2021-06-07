@@ -63,6 +63,7 @@ public class Enemy : Entity, IDamagable
     
 public virtual void Attack(int damage)
     {
+        player = FindObjectOfType<Player>();
         player.getHitForDamage(damage, this.transform, knockback);
     }
 
@@ -96,7 +97,7 @@ public virtual void Attack(int damage)
         getHitForDamage(damage);
         player.hitConnect = true;
         Vector2 direction = (transform.position - player.transform.position).normalized.x * Vector2.right;
-        StartCoroutine(InvincibilityCoroutine(1f, direction, knockbackTaken));
+        StartCoroutine(InvincibilityCoroutine(0.5f, direction, knockbackTaken));
     }
 
 

@@ -18,8 +18,9 @@ public class bigMech : Enemy
     }
     public void Update()
     {
-        if (getDistanceFromObject(player.gameObject) < aggroRange)
-        { 
+        player = FindObjectOfType<Player>();
+        
+         
             if (!isAttacking)
             {
                 if (Time.time > cooldown && Mathf.Abs(_rigidbody.velocity.y) < 0.001f)
@@ -45,7 +46,7 @@ public class bigMech : Enemy
                 Bite();
                 biteCoolDown = Time.time + 3f;
             }
-        }
+        
     }
 
     public void Bite()

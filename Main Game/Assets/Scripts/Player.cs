@@ -43,6 +43,7 @@ public class Player : Entity, IDamagable {
 	GameObject[] gOver;
 	GameHandlerScript gameHandler;
 
+	bool loadingScene;
 	private void Awake()
     {
 		maxHp = 10;
@@ -67,30 +68,37 @@ public class Player : Entity, IDamagable {
 		currentHp = maxHp;
 	}
 
-	void Update() {
-        if (!gameHandler.isRunning) { return; }
-		CalculateVelocity ();
-		if(!isDashing && !isKnockedBack)
-        {
-			controller.Move (velocity * Time.deltaTime, directionalInput);
+	void Update()
+	{
+		if (!gameHandler.isRunning) { return; }
+		CalculateVelocity();
+		if (!isDashing && !isKnockedBack)
+		{
+			controller.Move(velocity * Time.deltaTime, directionalInput);
 
-			if (controller.collisions.above || controller.collisions.below) {
-				if (controller.collisions.slidingDownMaxSlope) {
+			if (controller.collisions.above || controller.collisions.below)
+			{
+				if (controller.collisions.slidingDownMaxSlope)
+				{
 					velocity.y += controller.collisions.slopeNormal.y * -gravity * Time.deltaTime;
-				} else {
+				}
+				else
+				{
 					velocity.y = 0;
 				}
 			}
-        }
-		if(isDashing)
-        {
+		}
+		if (isDashing)
+		{
 			gravity = 0;
 			controller.Move(targetDash * Time.deltaTime * dashSpeed, directionalInput);
-        }
-        else
-        {
+		}
+		else
+		{
 			gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
 		}
+
+		if (transform.position.x > 130 && !loadingScene) { loadingScene = true; OnSceneLoaded(); SceneManager.LoadScene(2);}
 		updateAnimations();
 	}
 
@@ -310,5 +318,10 @@ public class Player : Entity, IDamagable {
     {
 		currentHp = maxHp;
 		animeThor.SetTrigger("Idle");
-    }
+		gameHandler.isRunning = true;
+		transform.position = new Vector3(-14, 1, 0);
+		transform.localScale = new Vector3(1, 1, 1);
+		controller.CalculateRaySpacing();
+		controller.UpdateRaycastOrigins();
+	}
 }

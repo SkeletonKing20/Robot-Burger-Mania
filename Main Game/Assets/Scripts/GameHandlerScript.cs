@@ -15,7 +15,7 @@ public class GameHandlerScript : MonoBehaviour
         player = FindObjectOfType<Player>();
         if (player != null)
         {
-            player.transform.position = new Vector3(-14, -1, 0);
+            player.transform.position = new Vector3(-14, 1, 0);
         }
     }
     public void ResetGame()

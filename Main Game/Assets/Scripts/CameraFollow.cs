@@ -19,13 +19,18 @@ public class CameraFollow : MonoBehaviour {
 	}
 
 	void Update() {
-		if (transform.position.x >= 0 && !locked)
+		target = FindObjectOfType<Player>().GetComponent<Controller2D>();
+		if (transform.position.x >= 0 && transform.position.x <= 115)
 		{
 			followPlayer();
 		}
 		if (transform.position.x < 0)
 		{
 			transform.position = new Vector3(0, 1, -10);
+		}
+		if (transform.position.x > 115)
+		{
+			transform.position = new Vector3(115, 1, -10);
 		}
 	}
 

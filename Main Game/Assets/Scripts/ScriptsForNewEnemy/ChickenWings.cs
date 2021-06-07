@@ -7,7 +7,8 @@ public class ChickenWings : NewEnemyScript
     public Vector3[] PatrolPoints;
     public override IEnumerator IDLE()
     {
-        while(states == ENEMY_STATE.IDLE && transform.position != PatrolPoints[1])
+        isInvincible = false;
+        while (states == ENEMY_STATE.IDLE && transform.position != PatrolPoints[1])
         {
             animator.transform.localScale = PatrolPoints[1].x >= transform.position.x ? scaleRight : scaleLeft;
             transform.position = Vector3.MoveTowards(transform.position, PatrolPoints[1], deltaStep);
@@ -31,6 +32,8 @@ public class ChickenWings : NewEnemyScript
     }
     public override IEnumerator CHASE()
     {
+        isInvincible = false;
+        player = FindObjectOfType<Player>();
         lastPlayerPosition = player.transform.position;
         animator.transform.localScale = lastPlayerPosition.x > transform.position.x ? scaleRight : scaleLeft;
         animator.SetTrigger("startChasing");
@@ -51,10 +54,10 @@ public class ChickenWings : NewEnemyScript
         Vector3 targetKnockback = transform.position + knockBackTaken;
         while(transform.position != targetKnockback)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetKnockback, deltaStep * 3);
+            transform.position = Vector3.MoveTowards(transform.position, targetKnockback, deltaStep * 10);
             yield return new WaitForEndOfFrame();
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
         isInvincible = false;
         if(currentHp > 0) { states = ENEMY_STATE.IDLE; }
     }
@@ -69,6 +72,7 @@ public class ChickenWings : NewEnemyScript
 
     public override IEnumerator ATTACK()
     {
+        isInvincible = false;
         animator.SetTrigger("Attack");
         yield return new WaitForSeconds(0.8f);
         states = ENEMY_STATE.IDLE;
@@ -77,13 +81,26 @@ public class ChickenWings : NewEnemyScript
     {
         while (gameHandler.isRunning)
         {
-                if (Random.value > .5 && transform.position.y > 4) { states = ENEMY_STATE.CHASE; }
+            isInvincible = false;
+            if (Random.value > .5 && transform.position.y > 4) { states = ENEMY_STATE.CHASE; }
                 yield return StartCoroutine(states.ToString());
         }
     }
 
     public override void getHitByHeavyAttack()
     {
-
+        if (currentHp > 1)
+        {
+            isInvincible = true;
+            if (states != ENEMY_STATE.DAMAGE) { StopCoroutine(coroutine); }
+            getHitForDamage(2);
+            if(transform.position.x < player.transform.position.x)
+            knockBackTaken = new Vector3(-4, 0, 0);
+            else
+            knockBackTaken = new Vector3(4, 0, 0);
+            states = ENEMY_STATE.DAMAGE;
+            StartCoroutine(EnemyFSM());
+        }
+        else DIE();
     }
 }
