@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 public class Player : Entity, IDamagable {
 
 	public LayerMask punchMe;
@@ -41,6 +42,7 @@ public class Player : Entity, IDamagable {
 
 	GameObject[] gOver;
 	GameHandlerScript gameHandler;
+
 	private void Awake()
     {
 		maxHp = 10;
@@ -303,4 +305,10 @@ public class Player : Entity, IDamagable {
 		}
 		isKnockedBack = false;
 	}
+
+    public void OnSceneLoaded()
+    {
+		currentHp = maxHp;
+		animeThor.SetTrigger("Idle");
+    }
 }

@@ -21,10 +21,8 @@ public class GameHandlerScript : MonoBehaviour
     public void ResetGame()
     {
         isRunning = true;
-        player.currentHp = 10;
-        player.GetComponentInChildren<Animator>().SetTrigger("Idle");
+        player.OnSceneLoaded();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        player.currentHp = player.maxHp;
         player.GetComponentInChildren<SpriteRenderer>().transform.localScale = player.scaleRight;
     }
 

@@ -47,13 +47,14 @@ public class ButtonScript : MonoBehaviour
     }
     public void Restart()
     {
-        player.currentHp = 10;
-        player.GetComponentInChildren<Animator>().SetTrigger("Idle");
+        player.OnSceneLoaded();
         gameHandler.isRunning = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void MainMenu()
     {
+        player.OnSceneLoaded();
+        Destroy(player.gameObject);
         SceneManager.LoadScene(0);
     }
 
@@ -64,7 +65,7 @@ public class ButtonScript : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     private void OnMouseEnter()
