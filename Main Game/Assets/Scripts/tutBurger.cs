@@ -37,18 +37,19 @@ public class tutBurger : Enemy
             }
         }
 
-        if (isFleeing && getDistanceFromObject(player.gameObject) < 12f)
+        if (isFleeing && getDistanceFromObject(player.gameObject) < 22f)
         {
             moveRight();
         }
+
+
     }
 
     public void abandonShip()
     {
         spriteR.flipX = true;
-        speed *= 2;
+        speed *= 4;
         isFleeing = true;
-        isInvincible = true;
     }
 
     public override void gameOver()

@@ -56,4 +56,11 @@ public class bigMech : Enemy
             animeThor.SetTrigger("Attack");
         }
     }
+
+    public override void gameOver()
+    {
+        isInvincible = true;
+        isDead = true;
+        animeThor.SetTrigger("Die");
+    }
 }
