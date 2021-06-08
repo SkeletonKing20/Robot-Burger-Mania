@@ -32,18 +32,26 @@ public class ChickenWings : NewEnemyScript
     }
     public override IEnumerator CHASE()
     {
-        isInvincible = false;
-        player = FindObjectOfType<Player>();
-        lastPlayerPosition = player.transform.position;
-        animator.transform.localScale = lastPlayerPosition.x > transform.position.x ? scaleRight : scaleLeft;
-        animator.SetTrigger("startChasing");
-        yield return new WaitForSeconds(.5f);
-        while (transform.position != lastPlayerPosition)
+            isInvincible = false;
+            player = FindObjectOfType<Player>();
+            lastPlayerPosition = player.transform.position;
+        if (Mathf.Abs(lastPlayerPosition.x - transform.position.x) < 20)
         {
-            transform.position = Vector3.MoveTowards(transform.position, lastPlayerPosition, deltaStep * 2);
-            yield return null;
+
+            animator.transform.localScale = lastPlayerPosition.x > transform.position.x ? scaleRight : scaleLeft;
+            animator.SetTrigger("startChasing");
+            yield return new WaitForSeconds(.5f);
+            while (transform.position != lastPlayerPosition)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, lastPlayerPosition, deltaStep * 2);
+                yield return null;
+            }
+            states = ENEMY_STATE.ATTACK;
         }
-        states = ENEMY_STATE.ATTACK;
+        else
+        {
+            states = ENEMY_STATE.IDLE;
+        }
     }
 
     public override IEnumerator DAMAGE()

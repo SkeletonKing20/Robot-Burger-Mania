@@ -63,4 +63,20 @@ public class bigMech : Enemy
         isDead = true;
         animeThor.SetTrigger("Die");
     }
+
+    public IEnumerator MoveTo(Vector3 target)
+    {
+        while(Mathf.Abs(transform.position.x - target.x) > 0.0000001f && Mathf.Abs(transform.position.x - target.x) < 10)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.x, transform.position.y, 0), 5f * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    public void attackPosition(Vector3 target)
+    {
+        StartCoroutine(MoveTo(target));
+    }
+
+
 }
