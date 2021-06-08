@@ -19,6 +19,7 @@ public class Enemy : Entity, IDamagable
     public float knockbackTaken;
     public float initialKnockbackTaken = 1;
     public float aggroRange;
+    public AudioClip damageTaken;
     public virtual void Start()
     {
         player = FindObjectOfType<Player>();
@@ -107,34 +108,37 @@ public virtual void Attack(int damage)
         if (!isInvincible)
         {
 
+            AudioSource.PlayClipAtPoint(damageTaken, transform.position);
             if (collision.gameObject.CompareTag("Player"))
             {
                 Attack(damage);
             }
             if (collision.gameObject.CompareTag("Attack"))
             {
-                knockbackTaken = 0;
-                TakeAHit(1);
+                if (!isInvincible)
+                {
+                    knockbackTaken = 0;
+                    TakeAHit(1);
+                }
             }
             if (collision.gameObject.CompareTag("heavyAttack"))
             {
-                knockbackTaken = initialKnockbackTaken * 2;
-                TakeAHit(2);
+                if (!isInvincible)
+                {
+                    knockbackTaken = initialKnockbackTaken * 2;
+                    TakeAHit(2);
+                }
             }
             if (collision.gameObject.CompareTag("downTilt"))
             {
-                animeThor.SetTrigger("TakeDamage");
-                getHitForDamage(1);
-                hopping = false;
-                _rigidbody.AddForce(new Vector2(0, 8), ForceMode2D.Impulse);
+                if (!isInvincible)
+                {
+                    animeThor.SetTrigger("TakeDamage");
+                    getHitForDamage(1);
+                    hopping = false;
+                    _rigidbody.AddForce(new Vector2(0, 8), ForceMode2D.Impulse);
+                }
             }
-        }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Attack(damage);
         }
     }
 

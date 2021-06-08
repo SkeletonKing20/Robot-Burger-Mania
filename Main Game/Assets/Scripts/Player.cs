@@ -38,6 +38,8 @@ public class Player : Entity, IDamagable {
 	Controller2D controller;
 	SpriteRenderer spriteR;
 	BoxCollider2D box2D;
+	public AudioClip damage;
+	public AudioClip death;
 	public bool isDead;
 
 	GameObject[] gOver;
@@ -56,6 +58,7 @@ public class Player : Entity, IDamagable {
 		players = FindObjectsOfType<Player>();
 		if (players.Length > 1)
 		{
+			players[1].currentHp = this.currentHp;
 			Destroy(this.gameObject);
 		}
 		controller = GetComponent<Controller2D> ();
@@ -257,20 +260,22 @@ public class Player : Entity, IDamagable {
     {
 		if(!isInvincible)
         {
+			AudioSource.PlayClipAtPoint(this.damage, transform.position);
 			animeThor.SetTrigger("takeDamage");
 			currentHp -= damage;
-			checkForDeath();
+            if (currentHp < 0) { currentHp = 0; }
+			if (checkForDeath())
+			{
+				gameOver();
+			}
 			Vector2 direction = (transform.position - attacker.transform.position).normalized.x * Vector2.right;
 			StartCoroutine(InvincibilityCoroutine(2f, direction.normalized, knockback));
 			StartCoroutine(knockBackCoroutine(0.2f, direction.normalized, knockback));
         }
-        if (checkForDeath())
-        {
-			gameOver();
-        }
     }
 	public override void gameOver()
     {
+		AudioSource.PlayClipAtPoint(death, transform.position);
 		gOver = GameObject.FindGameObjectsWithTag("GameOver");
 		gameHandler.isRunning = false;
 		isInvincible = true;
@@ -320,8 +325,12 @@ public class Player : Entity, IDamagable {
 		animeThor.SetTrigger("Idle");
 		gameHandler.isRunning = true;
 		transform.position = new Vector3(-14, 1, 0);
-		transform.localScale = new Vector3(1, 1, 1);
-		controller.CalculateRaySpacing();
-		controller.UpdateRaycastOrigins();
+	}
+
+	public void scaleProperly()
+    {
+			transform.localScale = new Vector3(1, 1, 1);
+			controller.CalculateRaySpacing();
+			controller.UpdateRaycastOrigins();
 	}
 }
